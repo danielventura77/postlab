@@ -1,0 +1,4 @@
+streamlit~=1.41.1
+google-api-python-client~=2.159.0
+folium~=0.19.4
+streamlit_folium~=0.24.0

@@ -93,7 +93,7 @@ with mainCol1:
     with aba1:
 
         st.write("")
-        direita, esquerda = st.columns(2, vertical_alignment="bottom")
+        direita, esquerda = st.columns(2, vertical_alignment="top")
         with direita:
             st.text_input("**🔎 Termo de Pesquisa**", value=st.session_state.get("termo_pesquisa", None),
                           key="q", help=""":orange[Para pesquisar vídeos que correspondam a :blue[**"remo" ou "vela"**],   
@@ -116,7 +116,7 @@ with mainCol1:
                                                     playlists temáticas baseadas em suas séries ou  
                                                     programas de TV.]""")
 
-        cl1, cl2 = st.columns(2, vertical_alignment="bottom")
+        cl1, cl2 = st.columns(2, vertical_alignment="top")
         with cl1:
             st.date_input("**Publicado depois de**", value=st.session_state.get("publishedAfter", None),
                       format="DD/MM/YYYY", key="publishedAfter")
