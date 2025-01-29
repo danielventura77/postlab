@@ -3,17 +3,17 @@ import folium
 from streamlit_cookies_controller import CookieController
 from streamlit_folium import st_folium
 
+from backend.busca_youtube import search
 from colecoes.categorias import busca_categorias
 from colecoes.idiomas import idiomas_iso
 from colecoes.paises import paises_iso
 from colecoes.topicos import lista_topicos
 
-
 #Título
-col1, col2 = st.columns([0.05, 0.95])
-with col1:
+titleCol1, titleCol2 = st.columns([0.05, 0.95])
+with titleCol1:
     st.image("assets/images/youtube-logo.svg", width=85)
-with col2:
+with titleCol2:
     st.header("Youtube", divider="rainbow")
 
 st.write("")
@@ -59,8 +59,34 @@ def monta_mapa():
             st.session_state.locationRadius = None
 
 
-col1, col2 = st.columns([0.34, 0.67], border=True)
-with col1:
+def monta_resultado(itens):
+    st.markdown("##### Resultados")
+    for item in itens:
+
+        # Incorpora o vídeo do YouTube usando iframe
+        st.markdown(
+            f'<iframe width="100%" height="400" src="https://www.youtube.com/embed/{item["video_id"]}" frameborder="0" '
+            f'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; '
+            f'picture-in-picture" allowfullscreen></iframe>',
+            unsafe_allow_html=True
+        )
+
+        # Exibe os detalhes do vídeo
+        st.subheader(f'{item["title"]}')
+        col1, col2 = st.columns(2)
+        with col1:
+            st.page_link(f'https://www.youtube.com/channel/{item["channel_id"]}', label=f':green[{item["channel_title"]}]')
+        with col2:
+            st.write(f'Publicado em :green[{item["published_at"].strftime("%d/%m/%Y %H:%M:%S")}]')
+
+        st.write(f':grey[{item["description"]}]')
+
+        st.write("---")
+
+
+
+mainCol1, mainCol2 = st.columns([0.34, 0.67], border=True)
+with mainCol1:
 
     # Criando abas
     aba1, aba2 = st.tabs([":rainbow[**Quero Pesquisar via API do Youtube**]", "Já tenho os links dos vídeos"])
@@ -270,7 +296,13 @@ with col1:
 
         st.write("")
 
-        st.button("🔎 Pesquisar", use_container_width=True)
+        if st.button("🔎 Pesquisar", use_container_width=True):
+            cookie_controller = CookieController()
+            itens_result = search(cookie_controller.get("youtube_api_key"))
+            with mainCol2:
+                monta_resultado(itens_result)
+
+
 
 
 
@@ -284,15 +316,10 @@ with col1:
 
 
 
+with mainCol2:
+    st.empty()
 
 
-
-
-
-with col2:
-
-    st.markdown("##### Resultados")
-    st.write(st.session_state)
 
 
 

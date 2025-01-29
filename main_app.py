@@ -7,14 +7,15 @@ st.set_page_config(page_title="Postlab", page_icon=':material/experiment:', layo
 
 pages = {
     "Youtube": [
-        st.Page("home.py", title="Bem-vindo ao Postlab!", default=True, icon=":material/experiment:"),
+        #st.Page("home.py", title="Bem-vindo ao Postlab!", default=True, icon=":material/experiment:"),
         st.Page("youtube/selecionar_conteudo.py", title="Escolher Vídeos", icon=":material/video_search:"),
         st.Page("youtube/criar_artigos.py", title="Criar Artigos", icon=":material/draw:"),
         st.Page("youtube/publicar_artigos.py", title="Publicar em massa", icon=":material/hub:"),
     ],
     "Rascunho": [
-        st.Page("rascunho/stepper_exemplo.py", title="Rascunho", icon=":material/drafts:"),
-        st.Page("rascunho/abas.py", title="Abas", icon=":material/drafts:"),
+        #st.Page("rascunho/stepper_exemplo.py", title="Rascunho", icon=":material/drafts:"),
+        #st.Page("rascunho/abas.py", title="Abas", icon=":material/drafts:"),
+        #st.Page("rascunho/exemplo_busca.py", title="Exemplo Bsuca", icon=":material/drafts:"),
     ],
 }
 
